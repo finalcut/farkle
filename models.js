@@ -12,11 +12,19 @@ class Player{
     constructor(name){
         this.name = name;
         this.totalScore = 0;
-        this.turnScore = 0; 
+        this.currentTurnScore = 0;
+        this.isEndGameStarter = false;
+
+        this.heldDice = [];
+        
+    }
+
+    rollDice(dice){
+
     }
 }
 
-class Round{
+class PlayerTurn{
     constructor(rules){
         this.rollSets = [];
         this.rules = rules;

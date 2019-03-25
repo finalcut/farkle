@@ -1,13 +1,35 @@
 <html>
 <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="./models.js"></script>
         <script src="./farkle.js"></script>
 
     <script type="text/javascript">
-
+        var f;
         window.onload = function(){
+            f = new Farkle();
+            document.querySelector('#playerForm').onsubmit = addPlayer;
+        }
 
-            var f = new Farkle(2);
+        function addPlayer(){
+            // gets the player name from the form
+            var playerForm = document.querySelector('#txtPlayer');
+            var playerName = playerForm.value;
+
+
+            // adds the player to farkle
+            f.addPlayer(playerName);
+
+            console.table(f.players);
+
+
+            // clears the form
+            playerForm.value = '';
+
+            // redraw the gameboard
+            f.drawGame();
+
+            return false;
         }
     </script>
 
@@ -16,9 +38,26 @@
 <body>
 
     <div id="farkle">
+        <div class="row">
+            <div class="col-sm-6">
+                <form onsubmit="return addPlayer();" id="playerForm">
+                    <div class="form-group">
+                        <label for="txtPlayerName">Player </label>
+                        <input type="text" name="playerName" id="txtPlayer" value="">
+                    </div>
+                    <input type="submit" value="Add Player" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="col-sm-6" id="board">
+                shold be on the same line as the form
 
+            </div>
+        </div>
     </div>
 
+
+
+    
 </body>
 
 </html>
