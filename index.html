@@ -9,6 +9,13 @@
         window.onload = function(){
             f = new Farkle();
             document.querySelector('#playerForm').onsubmit = addPlayer;
+            document.querySelector('#btnStart').setAttribute("disabled",true);
+            document.querySelector('#btnEnd').setAttribute("disabled",true);
+            document.querySelector('#btnRoll').setAttribute("disabled",true);
+            document.querySelector('#btnStart').onclick = startGame;
+            document.querySelector('#btnRoll').onclick = roll;
+            document.querySelector('#btnEnd').onclick = endTurn;
+            
         }
 
         function addPlayer(){
@@ -18,18 +25,38 @@
 
 
             // adds the player to farkle
-            f.addPlayer(playerName);
+            if(playerName.trim().length > 0){
+                f.addPlayer(playerName);
 
-            console.table(f.players);
+                console.table(f.players);
+
+                if(f.players.length > 1){
+                    document.querySelector('#btnStart').removeAttribute("disabled");
+                }
 
 
-            // clears the form
-            playerForm.value = '';
+                // clears the form
+                playerForm.value = '';
 
-            // redraw the gameboard
-            f.drawGame();
-
+                // redraw the gameboard
+                f.drawGame();
+            }
             return false;
+        }
+
+        function startGame(){
+            document.querySelector('#btnAdd').setAttribute("disabled",true);
+            f.startGame();
+            document.querySelector('#btnEnd').removeAttribute("disabled");
+            document.querySelector('#btnRoll').removeAttribute("disabled");
+        }
+
+        function roll(){
+            f.roll();
+        }
+
+        function endTurn(){
+            f.endTurn();
         }
     </script>
 
@@ -45,12 +72,28 @@
                         <label for="txtPlayerName">Player </label>
                         <input type="text" name="playerName" id="txtPlayer" value="">
                     </div>
-                    <input type="submit" value="Add Player" class="btn btn-primary">
+                    <input type="submit" id="btnAdd" value="Add Player" class="btn btn-primary">
+                    <button  type="button" id="btnStart" class="btn btn-success">Start Game</button>
                 </form>
             </div>
-            <div class="col-sm-6" id="board">
-                shold be on the same line as the form
-
+            <div class="col-sm-3" id="board">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="dice">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="dice">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="actions">
+                <button type="button" id="btnRoll" class="btn btn-success">Roll</button>
+                <button type="button" id="btnEnd" class="btn btn-danger">End Turn</button>
             </div>
         </div>
     </div>
