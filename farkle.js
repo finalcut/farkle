@@ -29,8 +29,15 @@ class Farkle {
     endTurn(){
         var firstPlayer = 0;
         var lastPlayer = this.players.length -1;
-        this.currentPlayerIndex = this.currentPlayerIndex === lastPlayer ? firstPlayer : this.currentPlayerIndex++;
+
+        this.currentPlayerIndex = 
+            this.currentPlayerIndex === lastPlayer ? 
+                firstPlayer : 
+                this.currentPlayerIndex++;
+        
         this.currentPlayer = this.players[this.currentPlayerIndex];
+        this.currentPlayer.giveDice(this.dice);
+        this.drawDice();
     }
 
     roll(){
@@ -63,9 +70,10 @@ class Farkle {
         this.dice.forEach((d)=>{
             var wrapper = document.createElement('div');
             wrapper.setAttribute('id','die'+index+'wrapper');
-            wrapper.className = 'col-sm-2 btn btn-danger';
+            wrapper.className = 'col-sm-2 btn';
 
             var span = document.createElement('span');
+            span.className = 'btn btn-danger col-sm-1';
             span.innerText=d.value;
 
             wrapper.appendChild(span);
