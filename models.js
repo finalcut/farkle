@@ -5,7 +5,9 @@ class Die{
     }
 
     roll(){
-        this.value = Math.ceil(Math.random() * this._sides);
+        if(!this.isLocked){
+            this.value = Math.ceil(Math.random() * this._sides);
+        }
         return this.value;
     }
     reset(){
@@ -16,8 +18,12 @@ class Die{
 
 class Player{
     constructor(name){
-        this.name = name;
+        this._name = name.trim();
         this.initialize();
+    }
+
+    get name(){
+        return this._name;
     }
 
     initialize(){
@@ -32,6 +38,9 @@ class Player{
 
     giveDice(dice){
         this.dice = dice;
+        this.dice.forEach((d)=>{
+            d.reset();
+        });
     }
 
     rollDice(dice){
