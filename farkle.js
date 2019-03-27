@@ -10,9 +10,13 @@ class Farkle {
             this.dice[i-1] = new Die(this._dieSides);
         }
 
+
+        // we're going to use these to keep track of the current player
+        // and loop back to the first player after the last player goes.
         this.currentPlayer = null;
         this.currentPlayerIndex = 0;
 
+        // now that everything is setup; draw some dice.
         this.drawDice();
  
     }
