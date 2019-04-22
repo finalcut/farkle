@@ -22,6 +22,7 @@ class Farkle {
     }
 
     startGame(){
+        debugger;
         this.currentPlayer = this.players[this.currentPlayerIndex];
         this.currentPlayer.giveDice(this.dice);
     }
